@@ -1,0 +1,7 @@
+.python-version
+
+.pytest_cache/
+flask_stronghold.egg-info/
+dist/
+.coverage
+.tox/
