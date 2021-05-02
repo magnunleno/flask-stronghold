@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "A very simple and small Flask extension that makes all of your app's routes require login by default."
 authors = ["Magnun Leno <magnun.leno@gmail.com>"]
 license = "MIT"
+readme = "README.rst"
+homepage = "https://github.com/magnunleno/flask-stronghold"
 repository = "https://github.com/magnunleno/flask-stronghold"
+keywords = ["flask", "authorization", "security"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Web Environment",
