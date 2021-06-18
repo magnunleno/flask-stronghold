@@ -11,22 +11,33 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        include:
+          - {name: Linux, python: '3.9', os: ubuntu-latest, tox: py39}
+          - {name: Windows, python: '3.9', os: windows-latest, tox: py39}
+          - {name: Mac, python: '3.9', os: macos-latest, tox: py39}
+          - {name: '3.6', python: '3.6', os: ubuntu-latest, tox: py36}
+          - {name: '3.7', python: '3.7', os: ubuntu-latest, tox: py37}
+          - {name: '3.8', python: '3.8', os: ubuntu-latest, tox: py38}
+          - {name: '3.9', python: '3.9', os: ubuntu-latest, tox: py39}
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+    - uses: actions/setup-python@v2
+      name: Set up Python ${{ matrix.python }} on ${{ matrix.os }}
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python }}
+    - name: Update pip
+      run: |
+        pip install -U wheel
+        pip install -U setuptools
+        python -m pip install -U pip
+        pip install poetry
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        python -m pip install poetry
         poetry export -f requirements.txt --without-hashes --dev -o requirements.txt
         pip install -r requirements.txt
     - name: Lint with flake8
@@ -34,4 +45,4 @@ jobs:
         flake8 flask_stronghold tests --count --show-source --statistics
     - name: Test with pytest
       run: |
-        pytest
+        pytest --cov
