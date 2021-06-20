@@ -17,7 +17,7 @@ from typing import TYPE_CHECKING, Callable
 
 from flask_stronghold import handlers, config
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from wsgiref.types import WSGIApplication
 
 

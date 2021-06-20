@@ -16,7 +16,7 @@ from flask.wrappers import Request
 
 from flask_stronghold.utils import is_view_func_public
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from flask_stronghold import Stronghold
 
 

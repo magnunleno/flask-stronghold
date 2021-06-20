@@ -13,7 +13,7 @@ import re
 
 from typing import List, Pattern, TYPE_CHECKING
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from wsgiref.types import WSGIApplication
 
 DEFAULTS = {
